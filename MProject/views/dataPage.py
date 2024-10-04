@@ -64,3 +64,23 @@ if not df_cleaned.empty:
     st.pyplot(plt)
 else:
     st.write("No data available for the selected filters.")
+
+# --- Heatmap for Correlation Matrix ---
+st.write("Correlation Matrix Heatmap:")
+
+# Check if there are enough numeric columns to compute the correlation
+if len(df_cleaned.columns) > 1:
+    # Clear the figure before plotting
+    plt.clf()
+    
+    # Compute correlation matrix
+    corr = df_cleaned.corr()
+    
+    # Set up the figure size and draw the heatmap
+    plt.figure(figsize=(14, 10))
+    sns.heatmap(corr, annot=True, cmap='coolwarm', cbar=True)
+
+    # Display the heatmap in Streamlit
+    st.pyplot(plt)
+else:
+    st.write("Not enough data to generate a correlation heatmap.")
