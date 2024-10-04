@@ -46,12 +46,20 @@ st.write(df_cleaned.describe().T)
 sns.set(style="whitegrid")
 
 st.write("Histograms of Selected Columns:")
-plt.figure(figsize=(12, 8))
-df_cleaned.hist(bins=10, edgecolor='black', layout=(2, 3), figsize=(12, 10))
 
-# Add title and adjust layout
-plt.suptitle('Histograms (Filtered Data)', fontsize=16)
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+# Check if there is data to plot
+if not df_cleaned.empty:
+    # Clear the plot before creating a new one
+    plt.clf()
 
-# Display the plot in Streamlit
-st.pyplot(plt)
+    # Create the histograms
+    df_cleaned.hist(bins=10, edgecolor='black', layout=(2, 3), figsize=(12, 10))
+
+    # Add title and adjust layout
+    plt.suptitle('Histograms (Filtered Data)', fontsize=16)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+
+    # Display the plot in Streamlit
+    st.pyplot(plt)
+else:
+    st.write("No data available for the selected filters.")
